@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -13,21 +14,43 @@ export class SignupComponent {
   email = '';
   password = '';
   phone = '';
-  role = 'donor';
+  role = '';
+  zipcode = '';
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
-  onSignup() {
-    if (this.name && this.email && this.password && this.phone) {
+  onSignup(): void {
+    if (!this.role || this.role === '') {
+      this.snackBar.open('Please select your role', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snack-bar-error'],
+      });
+      return;
+    }
+
+    if (
+      this.name &&
+      this.email &&
+      this.password &&
+      this.phone &&
+      this.zipcode
+    ) {
       const signupData = {
         name: this.name,
         email: this.email,
         password: this.password,
         role: this.role,
         phone: this.phone,
+        zipcode: this.zipcode,
         location: {
-          address: 'Hardcoded Address', // optionally make dynamic later
+          address: 'Hardcoded Address', // can make dynamic later
           lat: 0,
           lng: 0,
         },
@@ -35,8 +58,14 @@ export class SignupComponent {
 
       this.authService.signup(signupData).subscribe({
         next: (res) => {
-          this.authService.storeAuthData(res.token, res.user.role);
-          this.router.navigate(['/dashboard']);
+          this.snackBar.open('Account created! Please log in.', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snack-bar-success'],
+          });
+
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error(err);

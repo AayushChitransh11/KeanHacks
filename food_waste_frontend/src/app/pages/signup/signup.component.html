@@ -1,27 +1,49 @@
-<div class="auth-container">
+<div class="auth-card">
   <h2>Signup</h2>
 
   <form (ngSubmit)="onSignup()">
-    <label>Name</label>
-    <input type="text" [(ngModel)]="name" name="name" required />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" name="name" [(ngModel)]="name" required />
+    </mat-form-field>
 
-    <label>Email</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" [(ngModel)]="email" required />
+    </mat-form-field>
 
-    <label>Password</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" [(ngModel)]="password" required />
+    </mat-form-field>
 
-    <label>Phone</label>
-    <input type="text" [(ngModel)]="phone" name="phone" required />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="text" name="phone" [(ngModel)]="phone" required />
+    </mat-form-field>
 
-    <label>Role</label>
-    <select [(ngModel)]="role" name="role">
-      <option value="donor">Donor</option>
-      <option value="receiver">Receiver</option>
-    </select>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Zipcode</mat-label>
+      <input matInput type="text" name="zipcode" [(ngModel)]="zipcode" required />
+    </mat-form-field>
 
-    <button type="submit">Signup</button>
+    <mat-form-field appearance="fill" class="full-width">
+  <mat-label>Role</mat-label>
+  <mat-select [(ngModel)]="role" name="role" required>
+    <mat-option value="" disabled selected>Select your role</mat-option>
+    <mat-option value="donor">Donor</mat-option>
+    <mat-option value="receiver">Receiver</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" class="full-width">
+      Signup
+    </button>
+    <div class="login-redirect">
+  Already a user?
+  <a routerLink="/login">Login</a>
+</div>
+
   </form>
-
-  <p style="color: red;" *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>

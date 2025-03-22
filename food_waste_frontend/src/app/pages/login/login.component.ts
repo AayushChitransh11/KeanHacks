@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
-  role = 'donor'; // Will get this from API response later
+  role = ''; // Will get this from API response later
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
