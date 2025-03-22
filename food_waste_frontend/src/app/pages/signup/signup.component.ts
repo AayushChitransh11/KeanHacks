@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   standalone: false,
@@ -10,19 +10,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  name = '';
-  email = '';
-  password = '';
-  phone = '';
-  role = '';
-  errorMessage = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  phone: string = '';
+  role: string = '';
+  errorMessage: string = '';
 
-  // address fields
-  street = '';
-  apt = '';
-  city = '';
-  state = '';
-  zip = '';
+  address = {
+    street: '',
+    apt: '',
+    city: '',
+    state: '',
+    zip: '',
+  };
 
   constructor(
     private authService: AuthService,
@@ -31,11 +32,12 @@ export class SignupComponent {
   ) {}
 
   onSignup(): void {
-    if (!this.role) {
+    if (!this.role || this.role === '') {
       this.snackBar.open('Please select your role', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
+        panelClass: ['snack-bar-error'],
       });
       return;
     }
@@ -45,51 +47,45 @@ export class SignupComponent {
       this.email &&
       this.password &&
       this.phone &&
-      this.street &&
-      this.city &&
-      this.state &&
-      this.zip
+      this.address.street &&
+      this.address.city &&
+      this.address.state &&
+      this.address.zip
     ) {
       const signupData = {
         name: this.name,
         email: this.email,
         password: this.password,
-        role: this.role,
         phone: this.phone,
+        role: this.role,
         address: {
-          street: this.street,
-          apt: this.apt,
-          city: this.city,
-          state: this.state,
-          zip: this.zip,
+          street: this.address.street,
+          apt: this.address.apt,
+          city: this.address.city,
+          state: this.address.state,
+          zip: this.address.zip,
         },
       };
 
+      console.log('Signup Payload:', signupData); // debug log
+
       this.authService.signup(signupData).subscribe({
-        next: (res) => {
-          this.snackBar.open('Signup successful!', 'Close', {
+        next: (res: any) => {
+          this.snackBar.open('Signup successful! Please login.', 'Close', {
             duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
           });
           this.router.navigate(['/login']);
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
-          this.errorMessage =
-            err.error?.message || 'Signup failed. Please try again.';
-          this.snackBar.open(this.errorMessage, 'Close', {
+          this.snackBar.open('Signup failed. Please try again.', 'Close', {
             duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
           });
         },
       });
     } else {
       this.snackBar.open('Please fill in all required fields', 'Close', {
         duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
       });
     }
   }

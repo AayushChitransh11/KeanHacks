@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -10,26 +11,43 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
-  role = ''; // Will get this from API response later
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
-  onLogin() {
-    if (this.email && this.password) {
-      this.authService.login(this.email, this.password).subscribe({
-        next: (res) => {
-          // Example response: { token: '...', user: { role: 'donor', ... } }
-          this.authService.storeAuthData(res.token, res.user.role);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          console.error(err);
-          this.errorMessage = 'Login failed. Check your credentials.';
-        },
+  onLogin(): void {
+    if (!this.email || !this.password) {
+      this.snackBar.open('Please enter both email and password', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['snack-bar-error'],
       });
-    } else {
-      this.errorMessage = 'Please fill in all fields';
+      return;
     }
+
+    this.authService.login(this.email, this.password).subscribe({
+      next: (res) => {
+        this.authService.storeAuthData(res.token, res.user.role);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.snackBar.open(
+          'Login failed. Please check your credentials.',
+          'Close',
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snack-bar-error'],
+          }
+        );
+      },
+    });
   }
 }
