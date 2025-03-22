@@ -1,6 +1,6 @@
 const Donation = require('../models/Donation');
 const geocodeAddress = require('../utils/geocode');
-const sendEmail = require('../utils/sendEmail'); // make sure this path matches your file name
+//const sendEmail = require('../utils/sendEmail'); // make sure this path matches your file name
 
 // @desc    Donor creates a donation
 exports.createDonation = async (req, res) => {
@@ -30,15 +30,15 @@ exports.createDonation = async (req, res) => {
     });
 
     // ✅ Send email alert using Resend
-    await sendEmail({
-      to: req.user.email,
-      subject: 'Thank you for your donation!',
-      html: `
-        <p>Hi ${req.user.name},</p>
-        <p>Your donation <strong>${title}</strong> has been successfully posted.</p>
-        <p>Thank you for helping reduce food waste!</p>
-      `
-    });
+    // await sendEmail({
+    //   to: req.user.email,
+    //   subject: 'Thank you for your donation!',
+    //   html: `
+    //     <p>Hi ${req.user.name},</p>
+    //     <p>Your donation <strong>${title}</strong> has been successfully posted.</p>
+    //     <p>Thank you for helping reduce food waste!</p>
+    //   `
+    // });
 
     res.status(201).json(donation);
   } catch (error) {
