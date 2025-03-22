@@ -1,0 +1,65 @@
+<div class="signup-wrapper">
+  <mat-card class="signup-card">
+    <h2 class="form-title">Signup</h2>
+
+    <form (ngSubmit)="onSignup()" class="signup-form">
+      <div class="form-grid">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="name" name="name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="password" name="password" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput [(ngModel)]="phone" name="phone" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Role</mat-label>
+          <mat-select [(ngModel)]="role" name="role" required>
+            <mat-option value="">Select your role</mat-option>
+            <mat-option value="donor">Donor</mat-option>
+            <mat-option value="receiver">Receiver</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput [(ngModel)]="address.street" name="street" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apt</mat-label>
+          <input matInput [(ngModel)]="address.apt" name="apt" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput [(ngModel)]="address.city" name="city" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <input matInput [(ngModel)]="address.state" name="state" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Zip</mat-label>
+          <input matInput [(ngModel)]="address.zip" name="zip" required />
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" class="submit-btn">Signup</button>
+    </form>
+  </mat-card>
+</div>

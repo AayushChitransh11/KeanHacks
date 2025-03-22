@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="custom-navbar">
+  <span class="app-logo">
+    <mat-icon>eco</mat-icon>
+    <span class="brand-name">The Food Share</span>
+  </span>
+
+  <span class="spacer"></span>
+
+  <!-- Show ONLY when logged in -->
+  <button *ngIf="authService.isLoggedIn()" mat-button (click)="logout()">Logout</button>
+
+  <!-- Show ONLY when NOT logged in -->
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+    <a mat-button routerLink="/signup" routerLinkActive="active-link">Signup</a>
+  </ng-container>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

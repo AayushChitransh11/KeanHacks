@@ -1,0 +1,49 @@
+.custom-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 64px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #2e7d32 !important;
+    /* Material Primary Blue */
+    color: white !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+}
+
+.brand-name {
+    margin-left: 4px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+a[mat-button],
+button[mat-button] {
+    color: white !important;
+    font-weight: 500;
+    margin-left: 12px;
+    font-size: 15px;
+    text-transform: capitalize;
+    border-radius: 4px;
+}
+
+a[mat-button]:hover,
+button[mat-button]:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active-link {
+    text-decoration: underline;
+    font-weight: 600;
+}
