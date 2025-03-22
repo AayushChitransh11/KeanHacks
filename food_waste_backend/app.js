@@ -1,11 +1,15 @@
 const express = require('express');
-const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db'); // ✅ updated path
 const userRoutes = require('./routes/userRoutes');
 const donationRoutes = require('./routes/donationRoutes');
 const claimRoutes = require('./routes/claimRoutes');
+const cors = require('cors');
+
+dotenv.config();
+connectDB();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
