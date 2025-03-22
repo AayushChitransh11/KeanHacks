@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon food_waste_backend/server.js",
-    "backend": "nodemon --watch food_waste_backend --exec node food_waste_backend/server.js"
+    
+    "backend": "nodemon --watch food_waste_backend --exec node food_waste_backend/server.js",
+    "dev": "nodemon food_waste_backend/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,16 @@
   },
   "homepage": "https://github.com/AayushChitransh11/KeanHacks#readme",
   "dependencies": {
+    "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.2"
+    "mongoose": "^8.12.2",
+    "multer": "^1.4.5-lts.2",
+    "resend": "^4.1.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
