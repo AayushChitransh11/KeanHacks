@@ -7,6 +7,8 @@ const claimRoutes = require('./routes/claimRoutes');
 const cors = require('cors');
 
 dotenv.config();
+console.log('MONGO_URI from .env:', process.env.MONGO_URI);
+
 connectDB();
 
 const app = express();

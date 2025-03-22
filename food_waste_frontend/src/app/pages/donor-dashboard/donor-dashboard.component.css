@@ -1,37 +1,37 @@
 .dashboard-container {
-    padding: 32px;
-    background-color: #f9fafb;
-    min-height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
+  padding: 32px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 mat-card.dashboard-section {
-    margin-bottom: 24px;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 mat-card-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
 }
 
 mat-card-content {
-    font-size: 15px;
-    color: #555;
+  font-size: 15px;
+  color: #555;
 }
 
 button[mat-raised-button] {
-    text-transform: capitalize;
-    font-weight: 600;
-    border-radius: 8px;
+  text-transform: capitalize;
+  font-weight: 600;
+  border-radius: 8px;
 }
