@@ -14,10 +14,13 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, { email, password });
   }
 
-  signup(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, data);
+  signup(signupData: any) {
+    return this.http.post(
+      'http://localhost:5001/api/users/register',
+      signupData
+    );
   }
-
+  
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

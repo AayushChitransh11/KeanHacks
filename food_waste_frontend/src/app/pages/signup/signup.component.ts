@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-signup',
   standalone: false,
+  selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
@@ -15,8 +15,14 @@ export class SignupComponent {
   password = '';
   phone = '';
   role = '';
-  zipcode = '';
   errorMessage = '';
+
+  // address fields
+  street = '';
+  apt = '';
+  city = '';
+  state = '';
+  zip = '';
 
   constructor(
     private authService: AuthService,
@@ -25,12 +31,11 @@ export class SignupComponent {
   ) {}
 
   onSignup(): void {
-    if (!this.role || this.role === '') {
+    if (!this.role) {
       this.snackBar.open('Please select your role', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        panelClass: ['snack-bar-error'],
       });
       return;
     }
@@ -40,7 +45,10 @@ export class SignupComponent {
       this.email &&
       this.password &&
       this.phone &&
-      this.zipcode
+      this.street &&
+      this.city &&
+      this.state &&
+      this.zip
     ) {
       const signupData = {
         name: this.name,
@@ -48,32 +56,41 @@ export class SignupComponent {
         password: this.password,
         role: this.role,
         phone: this.phone,
-        zipcode: this.zipcode,
-        location: {
-          address: 'Hardcoded Address', // can make dynamic later
-          lat: 0,
-          lng: 0,
+        address: {
+          street: this.street,
+          apt: this.apt,
+          city: this.city,
+          state: this.state,
+          zip: this.zip,
         },
       };
 
       this.authService.signup(signupData).subscribe({
         next: (res) => {
-          this.snackBar.open('Account created! Please log in.', 'Close', {
+          this.snackBar.open('Signup successful!', 'Close', {
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            panelClass: ['snack-bar-success'],
           });
-
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error(err);
-          this.errorMessage = 'Signup failed.';
+          this.errorMessage =
+            err.error?.message || 'Signup failed. Please try again.';
+          this.snackBar.open(this.errorMessage, 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
         },
       });
     } else {
-      this.errorMessage = 'Please fill in all fields';
+      this.snackBar.open('Please fill in all required fields', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
     }
   }
 }

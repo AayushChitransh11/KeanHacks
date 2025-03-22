@@ -1,103 +1,31 @@
-/* Full-screen layout */
-:host {
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f4f6f8;
-    /* subtle grey */
-    font-family: 'Segoe UI', sans-serif;
+    padding: 40px 16px;
 }
 
-/* Centered white card */
-.auth-card {
-    background-color: #ffffff;
-    padding: 32px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+.signup-card {
     width: 100%;
-    max-width: 420px;
-    transition: all 0.3s ease;
+    max-width: 450px;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.auth-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-}
-
-/* Heading */
-h2 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-weight: 600;
-    font-size: 24px;
-    color: #333;
-}
-
-/* Form fields */
 .full-width {
     width: 100%;
     margin-bottom: 16px;
 }
 
-/* Buttons */
-button[mat-button],
-button[mat-raised-button] {
+.title {
+    text-align: center;
+    margin-bottom: 16px;
     font-weight: 600;
-    text-transform: capitalize;
-    border-radius: 8px;
 }
 
-button[mat-raised-button] {
-    background-color: #1976d2;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
-button[mat-raised-button]:hover {
-    background-color: #1565c0;
-}
-
-/* Error snackbar */
-.snack-bar-error {
-    background-color: #d32f2f;
-    color: white;
-    font-weight: 500;
-    text-align: center;
-}
-
-/* Success snackbar */
-.snack-bar-success {
-    background-color: #2e7d32;
-    color: white;
-    font-weight: 500;
-    text-align: center;
-}
-
-/* Responsive support */
-@media (max-width: 480px) {
-    .auth-card {
-        margin: 0 16px;
-        padding: 24px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-}
 .login-redirect {
-    margin-top: 16px;
+    margin-top: 12px;
     text-align: center;
     font-size: 14px;
-    color: #555;
-}
-
-.login-redirect a {
-    color: #1976d2;
-    text-decoration: none;
-    font-weight: 600;
-    margin-left: 4px;
-}
-
-.login-redirect a:hover {
-    text-decoration: underline;
 }
