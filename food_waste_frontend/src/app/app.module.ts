@@ -7,8 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { DonateFoodComponent } from './pages/donate-food/donate-food.component';
-import { BrowseDonationsComponent } from './pages/browse-donations/browse-donations.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,13 +18,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     DonateFoodComponent,
-    BrowseDonationsComponent,
     DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

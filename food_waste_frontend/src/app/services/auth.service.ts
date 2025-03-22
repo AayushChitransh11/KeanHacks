@@ -1,10 +1,28 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  private baseUrl = 'http://localhost:5000/api/users'; // ✅ Backend base URL
+
+  constructor(private http: HttpClient) {}
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, { email, password });
+  }
+
+  signup(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, data);
+  }
+
+  getProfile(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/profile`, { headers });
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
@@ -14,7 +32,7 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
-  login(token: string, role: string) {
+  storeAuthData(token: string, role: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
   }

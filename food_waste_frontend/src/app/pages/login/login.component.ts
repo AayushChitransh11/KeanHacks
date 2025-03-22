@@ -10,19 +10,26 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
-  role = 'donor';
+  role = 'donor'; // Will get this from API response later
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    // Simulated login - replace with real API call later
     if (this.email && this.password) {
-      const fakeToken = 'mocked-jwt-token';
-      this.authService.login(fakeToken, this.role);
-      this.router.navigate(['/dashboard']);
+      this.authService.login(this.email, this.password).subscribe({
+        next: (res) => {
+          // Example response: { token: '...', user: { role: 'donor', ... } }
+          this.authService.storeAuthData(res.token, res.user.role);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Login failed. Check your credentials.';
+        },
+      });
     } else {
-      alert('Please fill in all fields');
+      this.errorMessage = 'Please fill in all fields';
     }
   }
 }
-

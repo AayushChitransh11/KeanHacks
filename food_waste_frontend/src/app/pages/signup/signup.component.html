@@ -11,6 +11,9 @@
     <label>Password</label>
     <input type="password" [(ngModel)]="password" name="password" required />
 
+    <label>Phone</label>
+    <input type="text" [(ngModel)]="phone" name="phone" required />
+
     <label>Role</label>
     <select [(ngModel)]="role" name="role">
       <option value="donor">Donor</option>
@@ -19,4 +22,6 @@
 
     <button type="submit">Signup</button>
   </form>
+
+  <p style="color: red;" *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>

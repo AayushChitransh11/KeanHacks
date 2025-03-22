@@ -12,18 +12,39 @@ export class SignupComponent {
   name = '';
   email = '';
   password = '';
+  phone = '';
   role = 'donor';
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSignup() {
-    // 🔁 Temporary mock signup until backend is connected
-    if (this.name && this.email && this.password) {
-      const fakeToken = 'mocked-jwt-token';
-      this.authService.login(fakeToken, this.role);
-      this.router.navigate(['/dashboard']);
+    if (this.name && this.email && this.password && this.phone) {
+      const signupData = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        role: this.role,
+        phone: this.phone,
+        location: {
+          address: 'Hardcoded Address', // optionally make dynamic later
+          lat: 0,
+          lng: 0,
+        },
+      };
+
+      this.authService.signup(signupData).subscribe({
+        next: (res) => {
+          this.authService.storeAuthData(res.token, res.user.role);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Signup failed.';
+        },
+      });
     } else {
-      alert('Please fill in all fields');
+      this.errorMessage = 'Please fill in all fields';
     }
   }
 }
